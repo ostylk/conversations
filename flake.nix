@@ -8,7 +8,13 @@
   inputs.conversations-src.flake = false;
 
   outputs = { self, nixpkgs, flake-utils, conversations-src }:
-    flake-utils.lib.eachDefaultSystem (system: {
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs { inherit system; config.android_sdk.accept_license = true; };
 
-    });
+        androidPkgs = pkgs.callPackage ./androidenv.nix { };
+      in
+      {
+        
+      });
 }
